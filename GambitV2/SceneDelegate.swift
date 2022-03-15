@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  GambitV2
-//
-//  Created by Abduladzhi on 13.03.2022.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

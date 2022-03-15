@@ -1,10 +1,3 @@
-//
-//  Presenter.swift
-//  GambitV2
-//
-//  Created by Abduladzhi on 13.03.2022.
-//
-
 import Foundation
 import UIKit
 

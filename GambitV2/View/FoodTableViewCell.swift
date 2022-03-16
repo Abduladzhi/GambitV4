@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol ViewControllerDelegate: AnyObject {
-    func plus(count: Int) -> Int
+    func plus(count: Int, id: Int) -> Int
 }
 
 class FoodTableViewCell: UITableViewCell {
@@ -20,14 +20,14 @@ class FoodTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
              super.prepareForReuse()
-        nameLabel.text?.removeAll()
-        labelPrice.text?.removeAll()
-        numberFood = 1
+//        nameLabel.text?.removeAll()
+//        labelPrice.text?.removeAll()
+//        numberFood = 1
         imageFood.image = nil
         }
     @IBAction func btnUp(_ sender: UIButton) {
         var number = Int(labelNumberFood.text ?? "0")
-        number = delegate?.plus(count: number ?? 0)
+        number = delegate?.plus(count: number ?? 0, id: self.id)
         self.labelNumberFood.text = String(number ?? 0)
 //        self.labelNumberFood.text = String(numberFood)
     }
@@ -39,10 +39,14 @@ class FoodTableViewCell: UITableViewCell {
         numberFood -= 1
         self.labelNumberFood.text = String(numberFood)
     }
-
+    var id = 0
     func configure(with food: Food, delegate: ViewControllerDelegate) {
+        
         self.delegate = delegate
-        self.labelNumberFood.text = String(numberFood)
+        self.id = food.id
+        let numberFood = UserDefaults.standard.string(forKey: "\(id)")
+//        print("\(numberFood) wjfhekjw ")
+        self.labelNumberFood.text = numberFood
         self.buttonBasket.isHidden = true
         self.nameLabel.text = food.name
         self.labelPrice.text = String(food.price) + "₽"

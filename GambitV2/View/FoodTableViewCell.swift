@@ -18,7 +18,7 @@ class FoodTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonUIUp: UIButton!
     @IBOutlet weak var buttonUILess: UIButton!
     
-    var numberFood: Int = 1
+    var numberFood: Int?
     
     override func prepareForReuse() {
              super.prepareForReuse()
@@ -35,7 +35,19 @@ class FoodTableViewCell: UITableViewCell {
     @IBAction func btnBasket(_ sender: UIButton) {
         var number = Int(labelNumberFood.text ?? "0")
         number = delegate?.plus(count: number ?? 0, id: self.id)
-        self.labelNumberFood.text = String(number ?? 0)
+        if number == nil || number == 0{
+            self.labelNumberFood.text = String(number ?? 0)
+            self.buttonBasket.isHidden = false
+            self.buttonUIUp.isHidden = true
+            self.buttonUILess.isHidden = true
+            self.labelNumberFood.isHidden = true
+        } else {
+            self.labelNumberFood.text = String(number ?? 0)
+            self.buttonBasket.isHidden = true
+            self.buttonUIUp.isHidden = false
+            self.buttonUILess.isHidden = false
+            self.labelNumberFood.isHidden = false
+        }
 //        self.labelNumberFood.text = String(numberFood)
     }
     
@@ -51,21 +63,19 @@ class FoodTableViewCell: UITableViewCell {
         self.delegate = delegate
         self.id = food.id
         let numberFood = UserDefaults.standard.string(forKey: "\(id)")
-        
-//        if ((labelNumberFood.text?.isEmpty) != nil) {
-//            self.buttonUIUp.isHidden = false
-//            self.buttonUILess.isHidden = false
-//            self.labelNumberFood.isHidden = false
-//            self.buttonBasket.isHidden = true
-//        } else {
-//            self.buttonUIUp.isHidden = true
-//            self.buttonUILess.isHidden = true
-//            self.labelNumberFood.isHidden = true
-//            self.buttonBasket.isHidden = false
-//        }
-        
-        self.labelNumberFood.text = numberFood
-        self.buttonBasket.isHidden = true
+        if numberFood == nil {
+            self.buttonBasket.isHidden = false
+            self.labelNumberFood.text = numberFood
+            self.buttonUIUp.isHidden = true
+            self.buttonUILess.isHidden = true
+            self.labelNumberFood.isHidden = true
+        } else {
+            self.buttonBasket.isHidden = true
+            self.buttonUIUp.isHidden = false
+            self.buttonUILess.isHidden = false
+            self.labelNumberFood.isHidden = false
+            self.labelNumberFood.text = numberFood
+        }
         self.nameLabel.text = food.name
         self.labelPrice.text = String(food.price) + "₽"
         self.imageFood.downloaded(from: food.image)

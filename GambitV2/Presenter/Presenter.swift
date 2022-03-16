@@ -41,7 +41,6 @@ extension ViewController: UITableViewDelegate {
         var food = foods[indexPath.row]
         let newBool = UserDefaults.standard.bool(forKey: "\(food.id)")
         food.isFavorite = (newBool)
-//        let actionTitle: String = food.isFavorite! ? "Favorite" : "Unfavorite"
         let favoriteAction = UIContextualAction(style: .normal, title: "") { action, view, completion in
             food.isFavorite?.toggle()
             self.foods[indexPath.row] = food

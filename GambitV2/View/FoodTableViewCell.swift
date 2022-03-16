@@ -1,8 +1,12 @@
 import Foundation
 import UIKit
 
+protocol ViewControllerDelegate: AnyObject {
+    func plus(count: Int) -> Int
+}
+
 class FoodTableViewCell: UITableViewCell {
-    
+    weak var delegate: ViewControllerDelegate?
     static let identifier = "foodCell"
     
     @IBOutlet weak var imageFood: UIImageView!
@@ -10,6 +14,7 @@ class FoodTableViewCell: UITableViewCell {
     @IBOutlet weak var labelPrice: UILabel!
     @IBOutlet weak var labelNumberFood: UILabel!
     @IBOutlet weak var buttonBasket: UIButton!
+    
     
     var numberFood: Int = 1
     
@@ -21,9 +26,12 @@ class FoodTableViewCell: UITableViewCell {
         imageFood.image = nil
         }
     @IBAction func btnUp(_ sender: UIButton) {
-        numberFood += 1
-        self.labelNumberFood.text = String(numberFood)
+        var number = Int(labelNumberFood.text ?? "0")
+        number = delegate?.plus(count: number ?? 0)
+        self.labelNumberFood.text = String(number ?? 0)
+//        self.labelNumberFood.text = String(numberFood)
     }
+    
     @IBAction func btnBasket(_ sender: UIButton) {
     }
     
@@ -31,8 +39,9 @@ class FoodTableViewCell: UITableViewCell {
         numberFood -= 1
         self.labelNumberFood.text = String(numberFood)
     }
-    
-    func configure(with food: Food) {
+
+    func configure(with food: Food, delegate: ViewControllerDelegate) {
+        self.delegate = delegate
         self.labelNumberFood.text = String(numberFood)
         self.buttonBasket.isHidden = true
         self.nameLabel.text = food.name

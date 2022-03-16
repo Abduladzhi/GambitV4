@@ -45,6 +45,9 @@ extension ViewController: UITableViewDelegate {
             food.isFavorite?.toggle()
             self.foods[indexPath.row] = food
             UserDefaults.standard.set(food.isFavorite, forKey: "\(food.id)")
+//            let qwer: Dictionary<String, Int> = ["count": 1, "isFavorite": 0]
+//            UserDefaults.standard.set(qwer, forKey: "\(food.id)")
+            print(food.id)
             completion(true)
         }
         if food.isFavorite! {
@@ -76,7 +79,7 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: ViewControllerDelegate {
     func minus(count: Int, id: Int) -> Int {
         var count = count
-        if count != 1 {
+        if count != 0 {
             count -= 1
             UserDefaults.standard.set(count, forKey: "\(id)")
         }
@@ -87,10 +90,33 @@ extension ViewController: ViewControllerDelegate {
     func plus(count: Int, id: Int) -> Int {
         var count = count
         count += 1
-        UserDefaults.standard.set(count, forKey: "\(id)")
-//        restDefault?.saveCount(count: count, id: id)
+//        UserDefaults.standard.set(count, forKey: "\(id)")
+        
+        restDefault?.saveCount(count: count, id: id)
+        print(id)
         return count
     }
 
 }
 
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image = image
+            }
+        }.resume()
+    }
+    
+    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
+}

@@ -1,10 +1,3 @@
-//
-//  FoodDefault.swift
-//  GambitV2
-//
-//  Created by Abduladzhi on 16.03.2022.
-//
-
 import Foundation
 
 class FoodDefault: DataDefaultsProtocol {
@@ -20,8 +13,6 @@ class FoodDefault: DataDefaultsProtocol {
 //        print("\(count) сохранение")
         return count ?? "0"
     }
-    
-    
 }
 
 

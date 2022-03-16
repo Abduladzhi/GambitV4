@@ -22,7 +22,7 @@ class FoodTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
              super.prepareForReuse()
-        labelNumberFood.text?.removeAll()
+//        labelNumberFood.text?.removeAll()
         imageFood.image = nil
         }
     @IBAction func btnUp(_ sender: UIButton) {
@@ -55,15 +55,27 @@ class FoodTableViewCell: UITableViewCell {
         var number = Int(labelNumberFood.text ?? "0")
         number = delegate?.minus(count: number ?? 0, id: self.id)
         self.labelNumberFood.text = String(number ?? 0)
+        if number == 0 {
+            self.labelNumberFood.text = String(number ?? 0)
+            self.buttonBasket.isHidden = false
+            self.buttonUIUp.isHidden = true
+            self.buttonUILess.isHidden = true
+            self.labelNumberFood.isHidden = true
+        } else {
+            self.labelNumberFood.text = String(number ?? 0)
+            self.buttonBasket.isHidden = true
+            self.buttonUIUp.isHidden = false
+            self.buttonUILess.isHidden = false
+            self.labelNumberFood.isHidden = false
+        }
 //        self.labelNumberFood.text = String(numberFood)
     }
     var id = 0
-    
     func configure(with food: Food, delegate: ViewControllerDelegate) {
         self.delegate = delegate
         self.id = food.id
         let numberFood = UserDefaults.standard.string(forKey: "\(id)")
-        if numberFood == nil {
+        if numberFood == nil || numberFood == "0"{
             self.buttonBasket.isHidden = false
             self.labelNumberFood.text = numberFood
             self.buttonUIUp.isHidden = true
@@ -82,26 +94,6 @@ class FoodTableViewCell: UITableViewCell {
     }
 }
 
-extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self?.image = image
-            }
-        }.resume()
-    }
-    
-    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
-    }
-}
+
 
 

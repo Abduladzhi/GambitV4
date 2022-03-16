@@ -39,18 +39,24 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var food = foods[indexPath.row]
-        var newBool = UserDefaults.standard.bool(forKey: "\(food.id)")
+        let newBool = UserDefaults.standard.bool(forKey: "\(food.id)")
         food.isFavorite = (newBool)
-        let actionTitle: String = food.isFavorite! ? "Favorite" : "Unfavorite"
-        let favoriteAction = UIContextualAction(style: .destructive, title: actionTitle) { action, view, completion in
+//        let actionTitle: String = food.isFavorite! ? "Favorite" : "Unfavorite"
+        let favoriteAction = UIContextualAction(style: .normal, title: "") { action, view, completion in
             food.isFavorite?.toggle()
             self.foods[indexPath.row] = food
             UserDefaults.standard.set(food.isFavorite, forKey: "\(food.id)")
             completion(true)
         }
-        favoriteAction.backgroundColor = .systemGray
+        if food.isFavorite! {
+            favoriteAction.image = #imageLiteral(resourceName: "heartSecond")
+        } else {
+            favoriteAction.image = #imageLiteral(resourceName: "heart")
+        }
+        
+        favoriteAction.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.04)
         let configuration = UISwipeActionsConfiguration(actions: [favoriteAction])
-        configuration.performsFirstActionWithFullSwipe = false
+        configuration.performsFirstActionWithFullSwipe = true
         return configuration
     }
 }

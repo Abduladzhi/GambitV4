@@ -4,6 +4,7 @@ protocol DataDefaultsProtocol: AnyObject {
     func saveCount(count: Int, id: Int)
     func getNumber(id: Int) -> String
 }
+
 protocol FoodPresenterDelegate: AnyObject {
     func presentFoods(foods: [Food])
 }
@@ -27,7 +28,6 @@ class FoodPresenter {
         }
         task.resume()
     }
-    
     public func setViewDelegate(delegate: FoodPresenterDelegate & UIViewController) {
         self.delegate = delegate
     }
@@ -39,11 +39,13 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var food = foods[indexPath.row]
-        food.isFavorite = (food.isFavorite ?? false)
-        let actionTitle: String = food.isFavorite! ? "unFavorite" : "favorite"
+        var newBool = UserDefaults.standard.bool(forKey: "\(food.id)")
+        food.isFavorite = (newBool)
+        let actionTitle: String = food.isFavorite! ? "Favorite" : "Unfavorite"
         let favoriteAction = UIContextualAction(style: .destructive, title: actionTitle) { action, view, completion in
             food.isFavorite?.toggle()
             self.foods[indexPath.row] = food
+            UserDefaults.standard.set(food.isFavorite, forKey: "\(food.id)")
             completion(true)
         }
         favoriteAction.backgroundColor = .systemGray
@@ -84,5 +86,6 @@ extension ViewController: ViewControllerDelegate {
 //        restDefault?.saveCount(count: count, id: id)
         return count
     }
+
 }
 

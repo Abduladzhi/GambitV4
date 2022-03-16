@@ -8,7 +8,6 @@
 import Foundation
 
 class FoodDefault: DataDefaultsProtocol {
-    
     let defaults = UserDefaults.standard
     
     func saveCount(count: Int, id: Int) {

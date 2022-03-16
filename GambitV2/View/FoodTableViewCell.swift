@@ -4,6 +4,7 @@ import UIKit
 protocol ViewControllerDelegate: AnyObject {
     func plus(count: Int, id: Int) -> Int
     func minus(count: Int, id: Int) -> Int
+    
 }
 class FoodTableViewCell: UITableViewCell {
     weak var delegate: ViewControllerDelegate?

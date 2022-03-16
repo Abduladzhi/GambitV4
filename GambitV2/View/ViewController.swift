@@ -19,9 +19,9 @@ class ViewController: UIViewController, FoodPresenterDelegate {
     override func viewDidLayoutSubviews() {
         tableView.frame = view.bounds
     }
+//    Нажатие
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        Нажатие
     }
     
     // presenter delegate

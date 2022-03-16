@@ -13,11 +13,12 @@ class FoodDefault: DataDefaultsProtocol {
     
     func saveCount(count: Int, id: Int) {
         defaults.set(count, forKey: "\(id)")
-        print("\(count) сохранение")
+//        print("\(count) сохранение")
     }
     
     func getNumber(id: Int) -> String {
         let count = defaults.string(forKey: "\(id)")
+//        print("\(count) сохранение")
         return count ?? "0"
     }
     

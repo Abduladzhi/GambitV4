@@ -95,6 +95,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="buttonBasket" destination="PmB-cV-fHD" id="rou-kt-yGU"/>
+                                            <outlet property="buttonUILess" destination="pwy-oY-X2F" id="d9s-kw-Wha"/>
+                                            <outlet property="buttonUIUp" destination="2u9-kF-8YR" id="KqI-Ya-bXC"/>
                                             <outlet property="imageFood" destination="obR-NA-aGQ" id="dd8-Ql-WOz"/>
                                             <outlet property="labelNumberFood" destination="10c-nS-Or9" id="o30-11-xkC"/>
                                             <outlet property="labelPrice" destination="6xG-MT-Ls9" id="Ckg-zf-Rca"/>

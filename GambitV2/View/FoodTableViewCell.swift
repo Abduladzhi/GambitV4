@@ -3,8 +3,8 @@ import UIKit
 
 protocol ViewControllerDelegate: AnyObject {
     func plus(count: Int, id: Int) -> Int
+    func minus(count: Int, id: Int) -> Int
 }
-
 class FoodTableViewCell: UITableViewCell {
     weak var delegate: ViewControllerDelegate?
     static let identifier = "foodCell"
@@ -14,15 +14,14 @@ class FoodTableViewCell: UITableViewCell {
     @IBOutlet weak var labelPrice: UILabel!
     @IBOutlet weak var labelNumberFood: UILabel!
     @IBOutlet weak var buttonBasket: UIButton!
-    
+    @IBOutlet weak var buttonUIUp: UIButton!
+    @IBOutlet weak var buttonUILess: UIButton!
     
     var numberFood: Int = 1
     
     override func prepareForReuse() {
              super.prepareForReuse()
-//        nameLabel.text?.removeAll()
-//        labelPrice.text?.removeAll()
-//        numberFood = 1
+        labelNumberFood.text?.removeAll()
         imageFood.image = nil
         }
     @IBAction func btnUp(_ sender: UIButton) {
@@ -33,19 +32,37 @@ class FoodTableViewCell: UITableViewCell {
     }
     
     @IBAction func btnBasket(_ sender: UIButton) {
+        var number = Int(labelNumberFood.text ?? "0")
+        number = delegate?.plus(count: number ?? 0, id: self.id)
+        self.labelNumberFood.text = String(number ?? 0)
+//        self.labelNumberFood.text = String(numberFood)
     }
     
     @IBAction func btnLess(_ sender: UIButton) {
-        numberFood -= 1
-        self.labelNumberFood.text = String(numberFood)
+        var number = Int(labelNumberFood.text ?? "0")
+        number = delegate?.minus(count: number ?? 0, id: self.id)
+        self.labelNumberFood.text = String(number ?? 0)
+//        self.labelNumberFood.text = String(numberFood)
     }
     var id = 0
+    
     func configure(with food: Food, delegate: ViewControllerDelegate) {
-        
         self.delegate = delegate
         self.id = food.id
         let numberFood = UserDefaults.standard.string(forKey: "\(id)")
-//        print("\(numberFood) wjfhekjw ")
+        
+//        if ((labelNumberFood.text?.isEmpty) != nil) {
+//            self.buttonUIUp.isHidden = false
+//            self.buttonUILess.isHidden = false
+//            self.labelNumberFood.isHidden = false
+//            self.buttonBasket.isHidden = true
+//        } else {
+//            self.buttonUIUp.isHidden = true
+//            self.buttonUILess.isHidden = true
+//            self.labelNumberFood.isHidden = true
+//            self.buttonBasket.isHidden = false
+//        }
+        
         self.labelNumberFood.text = numberFood
         self.buttonBasket.isHidden = true
         self.nameLabel.text = food.name
@@ -75,3 +92,5 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
+
+

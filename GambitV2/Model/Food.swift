@@ -5,11 +5,13 @@ struct Food: Codable {
     let name: String
     let image: String
     let price: Int
+    var isFavorite: Bool?
 //    let oldPrice: Int
 //    let description: String
 //    var isFavorite: Bool?
 //
 //    init?(dict: [String: AnyObject]) {
+//        guard let isFavorite = dict["isFavorite"] as? Bool else { return false }
 //        guard let id = dict["id"] as? Int,
 //        let name = dict["name"] as? String,
 //        let image = dict["image"] as? String,
@@ -23,5 +25,6 @@ struct Food: Codable {
 //        self.price = price
 //        self.oldPrice = oldPrice
 //        self.description = description
+//        self.isFavorite = isFavorite
 //    }
 }

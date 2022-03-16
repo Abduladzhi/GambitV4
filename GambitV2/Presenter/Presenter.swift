@@ -12,7 +12,6 @@ typealias PresentDelegate = FoodPresenterDelegate & UIViewController
 
 class FoodPresenter {
     weak var delegate: PresentDelegate?
-    
     public func getFoods() {
         guard let url = URL(string: "https://api.gambit-app.ru/category/39?page=1") else { return }
         let task = URLSession.shared.dataTask(with: url) {[weak self] data, _, error in
@@ -34,30 +33,24 @@ class FoodPresenter {
     }
 }
 
+
 extension ViewController: UITableViewDelegate {
-//    private func handleMoveToFavorite() {
-//            print("Moved to favorite")
-//        }
-//    func tableView(_ tableView: UITableView,
-//                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let favorite = UIContextualAction(style: .normal,
-//                                                 title: "Favorite") { [weak self] (action, view, completionHandler) in
-//                                                    self?.handleMoveToFavorite()
-//                                                    completionHandler(true)
-//                }
-//        let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: {a,b,c in
-//                // example of your delete function
-//            self.foods.remove(at: indexPath.row)
-//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-//            })
-//
-////        deleteAction.image = UIImage(named: "trash.png")
-//        deleteAction.backgroundColor = .red
-//
-//        favorite.backgroundColor = .systemGray
-//        let configuration = UISwipeActionsConfiguration(actions: [favorite, deleteAction])
-//        return configuration
-//    }
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var food = foods[indexPath.row]
+        food.isFavorite = (food.isFavorite ?? false)
+        let actionTitle: String = food.isFavorite! ? "unFavorite" : "favorite"
+        let favoriteAction = UIContextualAction(style: .destructive, title: actionTitle) { action, view, completion in
+            food.isFavorite?.toggle()
+            self.foods[indexPath.row] = food
+            completion(true)
+        }
+        favoriteAction.backgroundColor = .systemGray
+        let configuration = UISwipeActionsConfiguration(actions: [favoriteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -74,6 +67,16 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: ViewControllerDelegate {
+    func minus(count: Int, id: Int) -> Int {
+        var count = count
+        if count != 1 {
+            count -= 1
+            UserDefaults.standard.set(count, forKey: "\(id)")
+        }
+//        restDefault?.saveCount(count: count, id: id)
+        return count
+    }
+    
     func plus(count: Int, id: Int) -> Int {
         var count = count
         count += 1

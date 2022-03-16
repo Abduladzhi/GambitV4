@@ -35,32 +35,29 @@ class FoodPresenter {
 }
 
 extension ViewController: UITableViewDelegate {
-    
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let food = foods[indexPath.row]
-//        let favoriteTitle = food.isFavorite ?? false ? "🤍":"❤️"
-//        let favoriteAction = UITableViewRowAction(style: .normal, title: favoriteTitle) { _, indexPath in
-//        self.foods[indexPath.row].isFavorite?.toggle()
+//    private func handleMoveToFavorite() {
+//            print("Moved to favorite")
 //        }
-//        favoriteAction.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.04)
-//        return [favoriteAction]
+//    func tableView(_ tableView: UITableView,
+//                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let favorite = UIContextualAction(style: .normal,
+//                                                 title: "Favorite") { [weak self] (action, view, completionHandler) in
+//                                                    self?.handleMoveToFavorite()
+//                                                    completionHandler(true)
+//                }
+//        let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: {a,b,c in
+//                // example of your delete function
+//            self.foods.remove(at: indexPath.row)
+//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//            })
+//
+////        deleteAction.image = UIImage(named: "trash.png")
+//        deleteAction.backgroundColor = .red
+//
+//        favorite.backgroundColor = .systemGray
+//        let configuration = UISwipeActionsConfiguration(actions: [favorite, deleteAction])
+//        return configuration
 //    }
-    
-    
-    private func handleMarkAsFavourite() {
-        print("Marked as favourite")
-    }
-    func tableView(_ tableView: UITableView,
-                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal,
-                                        title: "Favourite") { [weak self] (action, view, completionHandler) in
-                                            self?.handleMarkAsFavourite()
-                                            completionHandler(true)
-        }
-        action.backgroundColor = .systemBlue
-        return UISwipeActionsConfiguration(actions: [action])
-    }
 }
 
 extension ViewController: UITableViewDataSource {

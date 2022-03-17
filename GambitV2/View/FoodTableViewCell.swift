@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 protocol ViewControllerDelegate: AnyObject {
+    func openSecondVC()
     func plus(count: Int, id: Int) -> Int
     func minus(count: Int, id: Int) -> Int
     
@@ -21,18 +22,18 @@ class FoodTableViewCell: UITableViewCell {
     var numberFood: Int?
     
     override func prepareForReuse() {
-             super.prepareForReuse()
-//        labelNumberFood.text?.removeAll()
+        super.prepareForReuse()
         imageFood.image = nil
-        }
+    }
+    
     @IBAction func btnUp(_ sender: UIButton) {
         var number = Int(labelNumberFood.text ?? "0")
         number = delegate?.plus(count: number ?? 0, id: self.id)
         self.labelNumberFood.text = String(number ?? 0)
-//        self.labelNumberFood.text = String(numberFood)
     }
     
     @IBAction func btnBasket(_ sender: UIButton) {
+        
         var number = Int(labelNumberFood.text ?? "0")
         number = delegate?.plus(count: number ?? 0, id: self.id)
         if number == nil || number == 0{
@@ -48,7 +49,6 @@ class FoodTableViewCell: UITableViewCell {
             self.buttonUILess.isHidden = false
             self.labelNumberFood.isHidden = false
         }
-//        self.labelNumberFood.text = String(numberFood)
     }
     
     @IBAction func btnLess(_ sender: UIButton) {
@@ -68,8 +68,8 @@ class FoodTableViewCell: UITableViewCell {
             self.buttonUILess.isHidden = false
             self.labelNumberFood.isHidden = false
         }
-//        self.labelNumberFood.text = String(numberFood)
     }
+    
     var id = 0
     func configure(with food: Food, delegate: ViewControllerDelegate) {
         self.delegate = delegate

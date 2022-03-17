@@ -17,6 +17,10 @@
 		988971EA27DE5B6F001EE5D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 988971E827DE5B6F001EE5D9 /* LaunchScreen.storyboard */; };
 		988971F327DE5BDF001EE5D9 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988971F227DE5BDF001EE5D9 /* Food.swift */; };
 		988971F727DE5C4A001EE5D9 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988971F627DE5C4A001EE5D9 /* Presenter.swift */; };
+		E2FFE2DE27E3789A00952320 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFE2DD27E3789A00952320 /* UIImageExt.swift */; };
+		E2FFE2E027E3799B00952320 /* FoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFE2DF27E3799B00952320 /* FoodService.swift */; };
+		E2FFE2E327E37E2C00952320 /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFE2E227E37E2C00952320 /* SecondVC.swift */; };
+		E2FFE2E527E37E4A00952320 /* SecondVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2FFE2E427E37E4A00952320 /* SecondVC.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		988971EB27DE5B6F001EE5D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		988971F227DE5BDF001EE5D9 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		988971F627DE5C4A001EE5D9 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		E2FFE2DD27E3789A00952320 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		E2FFE2DF27E3799B00952320 /* FoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodService.swift; sourceTree = "<group>"; };
+		E2FFE2E227E37E2C00952320 /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
+		E2FFE2E427E37E4A00952320 /* SecondVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondVC.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,7 @@
 		988971DC27DE5B6E001EE5D9 /* GambitV2 */ = {
 			isa = PBXGroup;
 			children = (
+				E2FFE2E127E37E0C00952320 /* SecondVC */,
 				988971DD27DE5B6E001EE5D9 /* AppDelegate.swift */,
 				988971DF27DE5B6E001EE5D9 /* SceneDelegate.swift */,
 				9862C58A27E165CD00C39217 /* Service */,
@@ -81,6 +90,7 @@
 				988971E627DE5B6F001EE5D9 /* Assets.xcassets */,
 				988971E827DE5B6F001EE5D9 /* LaunchScreen.storyboard */,
 				988971EB27DE5B6F001EE5D9 /* Info.plist */,
+				E2FFE2DD27E3789A00952320 /* UIImageExt.swift */,
 			);
 			path = GambitV2;
 			sourceTree = "<group>";
@@ -89,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				988971F227DE5BDF001EE5D9 /* Food.swift */,
+				E2FFE2DF27E3799B00952320 /* FoodService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,6 +120,15 @@
 				988971F627DE5C4A001EE5D9 /* Presenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		E2FFE2E127E37E0C00952320 /* SecondVC */ = {
+			isa = PBXGroup;
+			children = (
+				E2FFE2E227E37E2C00952320 /* SecondVC.swift */,
+				E2FFE2E427E37E4A00952320 /* SecondVC.storyboard */,
+			);
+			path = SecondVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +192,7 @@
 				988971EA27DE5B6F001EE5D9 /* LaunchScreen.storyboard in Resources */,
 				988971E727DE5B6F001EE5D9 /* Assets.xcassets in Resources */,
 				988971E527DE5B6E001EE5D9 /* Main.storyboard in Resources */,
+				E2FFE2E527E37E4A00952320 /* SecondVC.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +207,10 @@
 				988971E227DE5B6E001EE5D9 /* ViewController.swift in Sources */,
 				988971F327DE5BDF001EE5D9 /* Food.swift in Sources */,
 				988971DE27DE5B6E001EE5D9 /* AppDelegate.swift in Sources */,
+				E2FFE2E027E3799B00952320 /* FoodService.swift in Sources */,
 				988971E027DE5B6E001EE5D9 /* SceneDelegate.swift in Sources */,
+				E2FFE2E327E37E2C00952320 /* SecondVC.swift in Sources */,
+				E2FFE2DE27E3789A00952320 /* UIImageExt.swift in Sources */,
 				988971F727DE5C4A001EE5D9 /* Presenter.swift in Sources */,
 				9862C55627DF7A6800C39217 /* FoodTableViewCell.swift in Sources */,
 			);
@@ -265,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -320,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

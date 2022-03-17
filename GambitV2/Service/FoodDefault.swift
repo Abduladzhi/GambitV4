@@ -1,5 +1,10 @@
 import Foundation
 
+protocol DataDefaultsProtocol: AnyObject {
+    func saveCount(count: Int, id: Int)
+    func getNumber(id: Int) -> Int
+}
+
 class FoodDefault: DataDefaultsProtocol {
     let defaults = UserDefaults.standard
     

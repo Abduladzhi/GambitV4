@@ -11,6 +11,7 @@ class ViewController: UIViewController, FoodPresenterDelegate {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        
         // Presenter
         presenter.setViewDelegate(delegate: self)
         presenter.getFoods()

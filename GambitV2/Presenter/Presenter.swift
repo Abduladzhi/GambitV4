@@ -1,8 +1,9 @@
 import Foundation
 import UIKit
+
 protocol DataDefaultsProtocol: AnyObject {
     func saveCount(count: Int, id: Int)
-    func getNumber(id: Int) -> String
+    func getNumber(id: Int) -> Int
 }
 
 protocol FoodPresenterDelegate: AnyObject {
@@ -12,6 +13,7 @@ protocol FoodPresenterDelegate: AnyObject {
 typealias PresentDelegate = FoodPresenterDelegate & UIViewController
 
 class FoodPresenter {
+    
     weak var delegate: PresentDelegate?
     public func getFoods() {
         guard let url = URL(string: "https://api.gambit-app.ru/category/39?page=1") else { return }
@@ -77,6 +79,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: ViewControllerDelegate {
+    
     func minus(count: Int, id: Int) -> Int {
         var count = count
         if count != 0 {
@@ -90,10 +93,10 @@ extension ViewController: ViewControllerDelegate {
     func plus(count: Int, id: Int) -> Int {
         var count = count
         count += 1
-//        UserDefaults.standard.set(count, forKey: "\(id)")
-        
-        restDefault?.saveCount(count: count, id: id)
-        print(id)
+        print("\(count) \(id)")
+        UserDefaults.standard.set(count, forKey: "\(id)")
+//        restDefault?.saveCount(count: count, id: id)
+//        restDefault?.saveCount(count: count, id: id)
         return count
     }
 

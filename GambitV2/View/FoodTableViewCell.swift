@@ -88,6 +88,8 @@ class FoodTableViewCell: UITableViewCell {
             self.labelNumberFood.isHidden = false
             self.labelNumberFood.text = numberFood
         }
+        labelPrice.layer.masksToBounds = true
+        labelPrice.layer.cornerRadius = 5
         self.nameLabel.text = food.name
         self.labelPrice.text = String(food.price) + "₽"
         self.imageFood.downloaded(from: food.image)
